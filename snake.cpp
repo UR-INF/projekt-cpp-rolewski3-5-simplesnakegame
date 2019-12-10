@@ -3,12 +3,14 @@
 #include<stdio.h>
 #include<windows.h>
 #include<stdlib.h>
+#include<iostream>
 
 using namespace std;
 
-int d = 1, dir =1, x = 200 ,y = 200, fruitX, fruitY, score;
+int d = 1, dir =1, x = 200 ,y = 200, fruitX, fruitY, score, gameOver;
 string scr = "scoooore: ";
 void Setup(){
+        gameOver==false;
         fruitX = (rand() % 43+1)*10;
         fruitY = (rand() % 43+1)*10;
         score=0;
@@ -17,6 +19,7 @@ void Setup(){
 void RelocateFruit(){
         fruitX = (rand() % 43+1)*10;
         fruitY = (rand() % 43+1)*10;
+        score+=10;
     }
 void Input(){
  if(GetAsyncKeyState(VK_RIGHT)){d=1;}
@@ -82,7 +85,7 @@ int main(){
     setfillstyle(1,2);
     Setup();
 
-    for(;;){
+    while(gameOver!=true){
         setfillstyle(1,0);
         bar(0,0,500,500);
         setfillstyle(1,2);
@@ -91,9 +94,13 @@ int main(){
         bar(0,440,450,450);//D
         bar(440,10,450,450);//P
 
-        scr ="scooore";
+        char intAsString [10] ; //int will be stored here as a string
+        itoa (score,intAsString,10);
 
-        outtextxy(500,20,"score");
+
+
+        outtextxy(450,0, "score:");
+        outtextxy(450,20, intAsString);
 
         Input();
 
@@ -104,7 +111,12 @@ int main(){
 
         if(fruitX==x && fruitY==y){
             RelocateFruit();
+
+            cout<<score<<endl;
+
+
         }
+        setfillstyle(1,4);
         bar(fruitX,fruitY,fruitX+10,fruitY+10);
         delay(100);
 
