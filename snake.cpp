@@ -9,10 +9,15 @@ using namespace std;
 int d = 1, dir =1, x = 200 ,y = 200, fruitX, fruitY, score;
 string scr = "scoooore: ";
 void Setup(){
-        fruitX = rand() % x;
-        fruitY = rand() % y;
+        fruitX = (rand() % 43+1)*10;
+        fruitY = (rand() % 43+1)*10;
         score=0;
 }
+
+void RelocateFruit(){
+        fruitX = (rand() % 43+1)*10;
+        fruitY = (rand() % 43+1)*10;
+    }
 void Input(){
  if(GetAsyncKeyState(VK_RIGHT)){d=1;}
         else if(GetAsyncKeyState(VK_LEFT)){d=2;}
@@ -24,13 +29,25 @@ void Input(){
 
         case 0:
             if(dir==1)
-                x=x+10;
+                if(x>430)
+                    x=10;
+                else
+                    x=x+10;
             else if (dir==2)
-                x=x-10;
+                if(x<10)
+                    x=430;
+                else
+                    x=x-10;
             else if (dir ==3)
-                y=y-10;
+                if(y<10)
+                    y=430;
+                else
+                    y=y-10;
             else if (dir ==4)
-                y=y+10;
+                if(y>430)
+                    y=10;
+                else
+                    y=y+10;
             else
                 d=0;
 
@@ -84,8 +101,12 @@ int main(){
         bar(x,y,x+10,y+10);
             delay(100);
 
+
+        if(fruitX==x && fruitY==y){
+            RelocateFruit();
+        }
         bar(fruitX,fruitY,fruitX+10,fruitY+10);
-            delay(100);
+        delay(100);
 
     }
 
