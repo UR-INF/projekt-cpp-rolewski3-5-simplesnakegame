@@ -4,26 +4,17 @@
 #include<windows.h>
 #include<stdlib.h>
 
+using namespace std;
 
-int main(){
-    int gd,gm, x = 200 ,y = 200, d =1, dir =1;
-    detectgraph(&gd,&gm);
-    initgraph(&gd,&gm,"");
-    delay(2000);
-
-    srand(time(NULL));
-    setfillstyle(1,2);
-
-    for(;;){
-        setfillstyle(1,0);
-        bar(0,0,640,480);
-        setfillstyle(1,2);
-        bar(0,0,640,10);
-        bar(0,0,10,480);
-        bar(0,480,640,470);
-        bar(630,10,640,480);
-
-        if(GetAsyncKeyState(VK_RIGHT)){d=1;}
+int d = 1, dir =1, x = 200 ,y = 200, fruitX, fruitY, score;
+string scr = "scoooore: ";
+void Setup(){
+        fruitX = rand() % x;
+        fruitY = rand() % y;
+        score=0;
+}
+void Input(){
+ if(GetAsyncKeyState(VK_RIGHT)){d=1;}
         else if(GetAsyncKeyState(VK_LEFT)){d=2;}
         else if(GetAsyncKeyState(VK_UP)){d=3;}
         else if(GetAsyncKeyState(VK_DOWN)){d=4;}
@@ -37,7 +28,7 @@ int main(){
             else if (dir==2)
                 x=x-10;
             else if (dir ==3)
-                y=y+10;
+                y=y-10;
             else if (dir ==4)
                 y=y+10;
             else
@@ -62,8 +53,38 @@ int main(){
             dir=4;
         break;
         }
+}
+
+int main(){
+    int gd,gm;
+    detectgraph(&gd,&gm);
+    initgraph(&gd,&gm,"");
+    delay(2000);
+
+    srand(time(NULL));
+    setfillstyle(1,2);
+    Setup();
+
+    for(;;){
+        setfillstyle(1,0);
+        bar(0,0,500,500);
+        setfillstyle(1,2);
+        bar(0,0,450,10);
+        bar(0,0,10,450);
+        bar(0,440,450,450);//D
+        bar(440,10,450,450);//P
+
+        scr ="scooore";
+
+        outtextxy(500,20,"score");
+
+        Input();
+
 
         bar(x,y,x+10,y+10);
+            delay(100);
+
+        bar(fruitX,fruitY,fruitX+10,fruitY+10);
             delay(100);
 
     }
