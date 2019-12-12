@@ -8,11 +8,35 @@
 using namespace std;
 
 int d = 1, dir =1, x = 200 ,y = 200, fruitX, fruitY, score, gameOver;
+int tailX[100], tailY[100];
+int nTail;
+
 void Setup(){
         gameOver==false;
         fruitX = (rand() % 43+1)*10;
         fruitY = (rand() % 43+1)*10;
         score=0;
+        nTail=1;
+        tailX[0]=x;
+        tailY[0]=y;
+
+}
+
+void Draw(){
+
+}
+void Move(){
+    for(int i=nTail;i>0;i--){
+        tailX[i]=tailX[i-1];
+        tailY[i]=tailY[i-1];
+        for(int j =nTail;j>0;j--){
+          cout<<"x:"<< tailX[j] <<" y: "<< tailY[j]<<endl;
+        }
+
+        cout<<" nTail: "<<nTail<<endl;
+    }
+    tailX[0] = x;
+    tailY[0] = y;
 }
 
 void RelocateFruit(){
@@ -56,6 +80,7 @@ void Input(){
         break;
         case 1:
             x=x+10;
+
             dir=1;
         break;
         case 2:
@@ -85,6 +110,9 @@ int main(){
     Setup();
 
     while(gameOver!=true){
+        Move();
+        Draw();
+
         setfillstyle(1,0);
         bar(0,0,500,500);
         setfillstyle(1,2);
@@ -104,20 +132,22 @@ int main(){
         Input();
 
 
+
         bar(x,y,x+10,y+10);
             delay(100);
 
 
         if(fruitX==x && fruitY==y){
             RelocateFruit();
+            nTail++;
 
             cout<<score<<endl;
-
-
         }
         setfillstyle(1,4);
         bar(fruitX,fruitY,fruitX+10,fruitY+10);
         delay(100);
+
+
 
     }
 
