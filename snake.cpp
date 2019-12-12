@@ -8,7 +8,6 @@
 using namespace std;
 
 int d = 1, dir =1, x = 200 ,y = 200, fruitX, fruitY, score, gameOver;
-string scr = "scoooore: ";
 void Setup(){
         gameOver==false;
         fruitX = (rand() % 43+1)*10;
@@ -91,10 +90,10 @@ int main(){
         setfillstyle(1,2);
         bar(0,0,450,10);
         bar(0,0,10,450);
-        bar(0,440,450,450);//D
-        bar(440,10,450,450);//P
+        bar(0,440,450,450);//DOWN
+        bar(440,10,450,450);//RIGHT
 
-        char intAsString [10] ; //int will be stored here as a string
+        char intAsString [10] ;
         itoa (score,intAsString,10);
 
 
