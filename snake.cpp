@@ -29,11 +29,6 @@ void Move(){
     for(int i=nTail;i>0;i--){
         tailX[i]=tailX[i-1];
         tailY[i]=tailY[i-1];
-        for(int j =nTail;j>0;j--){
-          cout<<"x:"<< tailX[j] <<" y: "<< tailY[j]<<endl;
-        }
-
-        cout<<" nTail: "<<nTail<<endl;
     }
     tailX[0] = x;
     tailY[0] = y;
@@ -131,11 +126,10 @@ int main(){
 
         Input();
 
-
-
-        bar(x,y,x+10,y+10);
+        for(int i =0;i<nTail;i++){
+          bar(tailX[i],tailY[i],tailX[i]+10,tailY[i]+10);
+        }
             delay(100);
-
 
         if(fruitX==x && fruitY==y){
             RelocateFruit();
