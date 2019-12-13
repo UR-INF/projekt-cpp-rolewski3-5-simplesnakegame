@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int d = 1, dir =1, x = 200 ,y = 200, fruitX, fruitY, score, gameOver;
+int d = 1, dir =1, x = 200 ,y = 200,speed = 200, fruitX, fruitY, score, gameOver;
 int tailX[100], tailY[100];
 int nTail;
 
@@ -134,6 +134,7 @@ int main(){
         if(fruitX==x && fruitY==y){
             RelocateFruit();
             nTail++;
+            speed=speed-5;
         }
 
         for(int i =1;i<nTail;i++){
@@ -143,9 +144,7 @@ int main(){
 
         setfillstyle(1,4);
         bar(fruitX,fruitY,fruitX+10,fruitY+10);
-        delay(100);
-
-
+        delay(speed);
 
     }
 
