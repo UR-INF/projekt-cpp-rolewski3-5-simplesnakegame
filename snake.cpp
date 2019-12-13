@@ -129,14 +129,18 @@ int main(){
         for(int i =0;i<nTail;i++){
           bar(tailX[i],tailY[i],tailX[i]+10,tailY[i]+10);
         }
-            delay(100);
+
 
         if(fruitX==x && fruitY==y){
             RelocateFruit();
             nTail++;
-
-            cout<<score<<endl;
         }
+
+        for(int i =1;i<nTail;i++){
+            if(x==tailX[i] && y==tailY[i])
+                gameOver=true;
+        }
+
         setfillstyle(1,4);
         bar(fruitX,fruitY,fruitX+10,fruitY+10);
         delay(100);
